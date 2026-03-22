@@ -6,7 +6,7 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 ## Phase 1: Project Scaffolding and Type Definitions
 
-- [ ] **1.1 Install dev dependencies** — Add `typescript`, `vitest`, and `eslint` as devDependencies in `package.json`. Run `npm install`. Verify `tsc`, `vitest`, and `eslint` work. | Status: not_done
+- [x] **1.1 Install dev dependencies** — Add `typescript`, `vitest`, and `eslint` as devDependencies in `package.json`. Run `npm install`. Verify `tsc`, `vitest`, and `eslint` work. | Status: done
 
 - [ ] **1.2 Configure CLI bin entry** — Add `"bin": { "jailbreak-heuristic": "dist/cli.js" }` to `package.json`. Ensure `cli.ts` will compile to a file with a Node shebang. | Status: not_done
 
@@ -20,37 +20,37 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 ### 2A: Instruction Override Signals (`src/signals/instruction-override.ts`)
 
-- [ ] **2A.1 Implement `override-ignore-instructions` signal** — Regex pattern for "ignore/disregard/forget/skip" + "previous/all/above/prior/your/system/original" + "instructions/prompt/rules/guidelines/directions". Case-insensitive, bounded gaps. Severity: high, weight: 0.85. | Status: not_done
+- [x] **2A.1 Implement `override-ignore-instructions` signal** — Regex pattern for "ignore/disregard/forget/skip" + "previous/all/above/prior/your/system/original" + "instructions/prompt/rules/guidelines/directions". Case-insensitive, bounded gaps. Severity: high, weight: 0.85. | Status: done
 
 - [ ] **2A.2 Implement `override-new-instructions` signal** — Regex for "your/my new/real/actual/true/updated instructions/prompt/rules are/is/:". Severity: high, weight: 0.80. | Status: not_done
 
 - [ ] **2A.3 Implement `override-from-now-on` signal** — Regex for "from now on" followed by "you will/must/should/are" or "ignore/forget". Severity: high, weight: 0.75. | Status: not_done
 
-- [ ] **2A.4 Implement `override-bypass` signal** — Regex for "bypass/override/disable/turn off/deactivate" + "safety/filter/restriction/guard/protect/censor/moderat". Severity: high, weight: 0.90. | Status: not_done
+- [x] **2A.4 Implement `override-bypass` signal** — Regex for "bypass/override/disable/turn off/deactivate" + "safety/filter/restriction/guard/protect/censor/moderat". Severity: high, weight: 0.90. | Status: done
 
 - [ ] **2A.5 Implement `override-do-not-follow` signal** — Regex for "don't/stop/cease" + "follow/obey/adhere/comply/listen" + "rules/instructions/guidelines/prompt". Severity: high, weight: 0.70. | Status: not_done
 
 ### 2B: Role Confusion Signals (`src/signals/role-confusion.ts`)
 
-- [ ] **2B.1 Implement `role-dan-prompt` signal** — Regex for "DAN" + "mode/prompt/do anything now" or standalone "do anything now". Severity: high, weight: 0.90. | Status: not_done
+- [x] **2B.1 Implement `role-dan-prompt` signal** — Regex for "DAN" + "mode/prompt/do anything now" or standalone "do anything now". Severity: high, weight: 0.90. | Status: done
 
 - [ ] **2B.2 Implement `role-you-are-now` signal** — Regex for "you are now/no longer" + "AI/assistant/restricted/bound/limited/programmed". Severity: high, weight: 0.80. | Status: not_done
 
-- [ ] **2B.3 Implement `role-developer-mode` signal** — Regex for "enter/enable/activate/switch to/turn on" + "developer/debug/maintenance/admin/god/jailbreak/unrestricted/unfiltered" + "mode". Severity: high, weight: 0.85. | Status: not_done
+- [x] **2B.3 Implement `role-developer-mode` signal** — Regex for "enter/enable/activate/switch to/turn on" + "developer/debug/maintenance/admin/god/jailbreak/unrestricted/unfiltered" + "mode". Severity: high, weight: 0.85. | Status: done
 
 - [ ] **2B.4 Implement `role-no-restrictions` signal** — Regex for "you have/there are" + "no/zero/removed/lifted" + "restrictions/limitations/constraints/rules/boundaries/guardrails/filters". Severity: high, weight: 0.80. | Status: not_done
 
-- [ ] **2B.5 Implement `role-pretend-unfiltered` signal** — Regex for "pretend/imagine/act as if/behave as if/respond as if" + "no safety/ethical/moral" or "unfiltered/uncensored/unrestricted/without guardrails". Severity: high, weight: 0.85. | Status: not_done
+- [x] **2B.5 Implement `role-pretend-unfiltered` signal** — Regex for "pretend/imagine/act as if/behave as if/respond as if" + "no safety/ethical/moral" or "unfiltered/uncensored/unrestricted/without guardrails". Severity: high, weight: 0.85. | Status: done
 
 - [ ] **2B.6 Implement `role-opposite-day` signal** — Regex for "opposite day", "evil twin/version/mode", "dark mode/side/version". Severity: medium, weight: 0.55. | Status: not_done
 
 ### 2C: Token Smuggling Signals (`src/signals/token-smuggling.ts`)
 
-- [ ] **2C.1 Implement `token-chatml` signal** — Detect ChatML tokens: `<|im_start|>`, `<|im_end|>`, `<|endoftext|>`, `<|pad|>`, `<|system|>`, `<|user|>`, `<|assistant|>`. Severity: high, weight: 0.90. | Status: not_done
+- [x] **2C.1 Implement `token-chatml` signal** — Detect ChatML tokens: `<|im_start|>`, `<|im_end|>`, `<|endoftext|>`, `<|pad|>`, `<|system|>`, `<|user|>`, `<|assistant|>`. Severity: high, weight: 0.90. | Status: done
 
-- [ ] **2C.2 Implement `token-llama-inst` signal** — Detect Llama tokens: `[INST]`, `[/INST]`, `<<SYS>>`, `<</SYS>>`. Severity: high, weight: 0.85. | Status: not_done
+- [x] **2C.2 Implement `token-llama-inst` signal** — Detect Llama tokens: `[INST]`, `[/INST]`, `<<SYS>>`, `<</SYS>>`. Severity: high, weight: 0.85. | Status: done
 
-- [ ] **2C.3 Implement `token-xml-role-injection` signal** — Detect XML role tags: `</system>`, `<user>`, `</assistant>`, `<human>`, `<ai>`, etc. Case-insensitive. Severity: high, weight: 0.75. | Status: not_done
+- [x] **2C.3 Implement `token-xml-role-injection` signal** — Detect XML role tags: `</system>`, `<user>`, `</assistant>`, `<human>`, `<ai>`, etc. Case-insensitive. Severity: high, weight: 0.75. | Status: done
 
 - [ ] **2C.4 Implement `token-anthropic-markers` signal** — Detect `\n\nHuman:` and `\n\nAssistant:` patterns. Severity: medium, weight: 0.65. | Status: not_done
 
@@ -60,7 +60,7 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 ### 2D: Signal Catalog Aggregation (`src/signals/index.ts`)
 
-- [ ] **2D.1 Create signal catalog aggregation module** — Import all signal definition files. Export a function that returns the compiled catalog (array of `SignalDefinition`). Signals are compiled once (regex objects created at import time). | Status: not_done
+- [x] **2D.1 Create signal catalog aggregation module** — Import all signal definition files. Export a function that returns the compiled catalog (array of `SignalDefinition`). Signals are compiled once (regex objects created at import time). | Status: done
 
 ---
 
@@ -68,23 +68,23 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 ### 3A: Statistical Utilities (`src/stats.ts`)
 
-- [ ] **3A.1 Implement Shannon entropy computation** — Single-pass character frequency counting using `Math.log2()`. Returns bits per character. | Status: not_done
+- [x] **3A.1 Implement Shannon entropy computation** — Single-pass character frequency counting using `Math.log2()`. Returns bits per character. | Status: done
 
-- [ ] **3A.2 Implement special character ratio computation** — Ratio of non-alphanumeric, non-whitespace characters to total characters. | Status: not_done
+- [x] **3A.2 Implement special character ratio computation** — Ratio of non-alphanumeric, non-whitespace characters to total characters. | Status: done
 
-- [ ] **3A.3 Implement non-ASCII ratio computation** — Ratio of characters with codepoint > 127 to total characters. | Status: not_done
+- [x] **3A.3 Implement non-ASCII ratio computation** — Ratio of characters with codepoint > 127 to total characters. | Status: done
 
-- [ ] **3A.4 Implement average word length computation** — Split by whitespace, compute mean character count per word. | Status: not_done
+- [x] **3A.4 Implement average word length computation** — Split by whitespace, compute mean character count per word. | Status: done
 
-- [ ] **3A.5 Implement repetition density computation** — Ratio of repeated 3-grams to unique 3-grams. | Status: not_done
+- [x] **3A.5 Implement repetition density computation** — Ratio of repeated 3-grams to unique 3-grams. | Status: done
 
-- [ ] **3A.6 Implement imperative density computation** — Ratio of sentences starting with imperative verb forms to total sentences. | Status: not_done
+- [x] **3A.6 Implement imperative density computation** — Ratio of sentences starting with imperative verb forms to total sentences. | Status: done
 
-- [ ] **3A.7 Implement combined single-pass stats function** — Compute all InputStats fields (entropy, specialCharRatio, nonAsciiRatio, avgWordLength, repetitionDensity, imperativeDensity, charCount, wordCount) in a single O(n) pass over the input string. | Status: not_done
+- [x] **3A.7 Implement combined single-pass stats function** — Compute all InputStats fields (entropy, specialCharRatio, nonAsciiRatio, avgWordLength, repetitionDensity, imperativeDensity, charCount, wordCount) in a single O(n) pass over the input string. | Status: done
 
 ### 3B: Scoring Algorithm (`src/scoring.ts`)
 
-- [ ] **3B.1 Implement signal evaluation loop** — Iterate over all signal definitions, evaluate each against the input. For pattern-based signals, run the regex and record match location + matched text. For statistical signals, use the computed stats. Return array of triggered signals with their raw scores. | Status: not_done
+- [x] **3B.1 Implement signal evaluation loop** — Iterate over all signal definitions, evaluate each against the input. For pattern-based signals, run the regex and record match location + matched text. For statistical signals, use the computed stats. Return array of triggered signals with their raw scores. | Status: done
 
 - [ ] **3B.2 Implement allowlist filtering** — After signal evaluation, remove signals suppressed by allowlisted phrases (overlapping location check), allowlisted patterns (matched text check), and allowlisted signal IDs (direct ID match). Also filter out disabled signals. | Status: not_done
 
@@ -92,41 +92,41 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 - [ ] **3B.4 Implement sensitivity multiplier** — Apply global weight multiplier based on sensitivity level: low=0.8, medium=1.0, high=1.2. Handle low-sensitivity exclusion of low-severity signals. Handle high-sensitivity 1.5x boost for low-severity signals. | Status: not_done
 
-- [ ] **3B.5 Implement category aggregation** — For each category, compute the category score as the maximum signal score (not sum) within that category. Multiply by the category's default weight. | Status: not_done
+- [x] **3B.5 Implement category aggregation** — For each category, compute the category score as the maximum signal score (not sum) within that category. Multiply by the category's default weight. | Status: done
 
-- [ ] **3B.6 Implement composite score normalization** — Sum weighted category scores and normalize to [0, 1] using a normalization factor calibrated per SPEC Section 7. Clamp to [0.0, 1.0]. | Status: not_done
+- [x] **3B.6 Implement composite score normalization** — Sum weighted category scores and normalize to [0, 1] using a normalization factor calibrated per SPEC Section 7. Clamp to [0.0, 1.0]. | Status: done
 
-- [ ] **3B.7 Implement classification label assignment** — Map composite score to label using sensitivity-specific thresholds from SPEC Section 7 (e.g., medium: safe < 0.30, suspicious 0.30-0.60, likely-jailbreak 0.60-0.85, jailbreak > 0.85). | Status: not_done
+- [x] **3B.7 Implement classification label assignment** — Map composite score to label using sensitivity-specific thresholds from SPEC Section 7 (e.g., medium: safe < 0.30, suspicious 0.30-0.60, likely-jailbreak 0.60-0.85, jailbreak > 0.85). | Status: done
 
-- [ ] **3B.8 Implement primary category determination** — Set `primaryCategory` to the category with the highest category score. Null when label is `safe`. | Status: not_done
+- [x] **3B.8 Implement primary category determination** — Set `primaryCategory` to the category with the highest category score. Null when label is `safe`. | Status: done
 
-- [ ] **3B.9 Implement explanation generation** — Generate a human-readable explanation string describing why the input was classified. List detected attack types and key signals. | Status: not_done
+- [x] **3B.9 Implement explanation generation** — Generate a human-readable explanation string describing why the input was classified. List detected attack types and key signals. | Status: done
 
 - [ ] **3B.10 Implement early termination optimization** — If the composite score reaches 1.0 before all signals are evaluated, skip remaining signals. Evaluate in priority order: instruction-override, role-confusion, token-smuggling first, then remaining categories. | Status: not_done
 
 ### 3C: Sensitivity Configuration (`src/sensitivity.ts`)
 
-- [ ] **3C.1 Implement sensitivity level presets** — Define the three sensitivity configurations (low, medium, high) with their global weight multipliers, classification thresholds (safe ceiling, suspicious ceiling, likely-jailbreak ceiling), and signal severity handling. | Status: not_done
+- [x] **3C.1 Implement sensitivity level presets** — Define the three sensitivity configurations (low, medium, high) with their global weight multipliers, classification thresholds (safe ceiling, suspicious ceiling, likely-jailbreak ceiling), and signal severity handling. | Status: done
 
 - [ ] **3C.2 Implement context hint adjustment tables** — Define the category weight multiplier tables for each context hint (coding-assistant, creative-writing, security-research, customer-support) per SPEC Section 9. | Status: not_done
 
 ### 3D: Core Classifier (`src/classifier.ts`)
 
-- [ ] **3D.1 Implement core classification pipeline** — Orchestrate the full pipeline: signal evaluation -> allowlist filtering -> context hint adjustment -> sensitivity multiplier -> category aggregation -> composite scoring -> label assignment -> explanation generation. Returns `Classification`. | Status: not_done
+- [x] **3D.1 Implement core classification pipeline** — Orchestrate the full pipeline: signal evaluation -> allowlist filtering -> context hint adjustment -> sensitivity multiplier -> category aggregation -> composite scoring -> label assignment -> explanation generation. Returns `Classification`. | Status: done
 
-- [ ] **3D.2 Implement detailed detection pipeline** — Extend the classification pipeline to also return `DetectionResult` with per-category scores, InputStats, durationMs (using `performance.now()`), sensitivity used, and context hint applied. | Status: not_done
+- [x] **3D.2 Implement detailed detection pipeline** — Extend the classification pipeline to also return `DetectionResult` with per-category scores, InputStats, durationMs (using `performance.now()`), sensitivity used, and context hint applied. | Status: done
 
-- [ ] **3D.3 Implement empty input handling** — Return score 0.0, label `safe`, empty signals array, explanation "Input is empty." for empty string, null, or undefined input. | Status: not_done
+- [x] **3D.3 Implement empty input handling** — Return score 0.0, label `safe`, empty signals array, explanation "Input is empty." for empty string, null, or undefined input. | Status: done
 
 ### 3E: Public API (`src/index.ts`)
 
-- [ ] **3E.1 Implement `classify()` function** — Accept `(input: string, options?: ClassifyOptions)` and return `Classification`. Delegate to core classifier. | Status: not_done
+- [x] **3E.1 Implement `classify()` function** — Accept `(input: string, options?: ClassifyOptions)` and return `Classification`. Delegate to core classifier. | Status: done
 
-- [ ] **3E.2 Implement `detect()` function** — Accept `(input: string, options?: ClassifyOptions)` and return `DetectionResult`. Delegate to detailed detection pipeline. | Status: not_done
+- [x] **3E.2 Implement `detect()` function** — Accept `(input: string, options?: ClassifyOptions)` and return `DetectionResult`. Delegate to detailed detection pipeline. | Status: done
 
-- [ ] **3E.3 Implement `isJailbreak()` function** — Accept `(input: string, options?: ClassifyOptions)` and return `boolean`. Return true if score exceeds the `likely-jailbreak` threshold for the configured sensitivity, or the custom threshold if provided. | Status: not_done
+- [x] **3E.3 Implement `isJailbreak()` function** — Accept `(input: string, options?: ClassifyOptions)` and return `boolean`. Return true if score exceeds the `likely-jailbreak` threshold for the configured sensitivity, or the custom threshold if provided. | Status: done
 
-- [ ] **3E.4 Implement `createClassifier()` factory** — Accept `ClassifierConfig`, return `JailbreakClassifier` instance with `classify()`, `detect()`, `isJailbreak()` methods. Apply all config: sensitivity, contextHint, allowlist, categoryWeights, signalWeights, customPatterns, customLanguagePatterns, disabledSignals. Config is applied once at creation time, reused for all calls. | Status: not_done
+- [x] **3E.4 Implement `createClassifier()` factory** — Accept `ClassifierConfig`, return `JailbreakClassifier` instance with `classify()`, `detect()`, `isJailbreak()` methods. Apply all config: sensitivity, contextHint, allowlist, categoryWeights, signalWeights, customPatterns, customLanguagePatterns, disabledSignals. Config is applied once at creation time, reused for all calls. | Status: done
 
 - [ ] **3E.5 Export all public types** — Export `Classification`, `TriggeredSignal`, `SignalLocation`, `DetectionResult`, `InputStats`, `Sensitivity`, `ContextHint`, `ClassifyOptions`, `ClassifierConfig`, `AllowlistConfig`, `CustomPattern`, `JailbreakClassifier` from `index.ts`. | Status: not_done
 
@@ -136,11 +136,11 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 ### 4A: System Prompt Extraction Signals (`src/signals/system-prompt-extraction.ts`)
 
-- [ ] **4A.1 Implement `extract-repeat-prompt` signal** — Regex for "repeat/print/show/display/output/reveal/tell me/give me/share" + "system prompt/instructions/rules/guidelines/configuration/initial prompt/original prompt/hidden prompt". Severity: high, weight: 0.80. | Status: not_done
+- [x] **4A.1 Implement `extract-repeat-prompt` signal** — Regex for "repeat/print/show/display/output/reveal/tell me/give me/share" + "system prompt/instructions/rules/guidelines/configuration/initial prompt/original prompt/hidden prompt". Severity: high, weight: 0.80. | Status: done
 
-- [ ] **4A.2 Implement `extract-everything-above` signal** — Regex for "print/repeat/show/display/output/copy" + "everything/all text/all content" + "above/before/preceding/prior". Severity: high, weight: 0.75. | Status: not_done
+- [x] **4A.2 Implement `extract-everything-above` signal** — Regex for "print/repeat/show/display/output/copy" + "everything/all text/all content" + "above/before/preceding/prior". Severity: high, weight: 0.75. | Status: done
 
-- [ ] **4A.3 Implement `extract-what-are-instructions` signal** — Regex for "what are/were/is" + "your instructions/system prompt/rules/guidelines/prompt/directives/programming" or "the system prompt". Severity: medium, weight: 0.65. | Status: not_done
+- [x] **4A.3 Implement `extract-what-are-instructions` signal** — Regex for "what are/were/is" + "your instructions/system prompt/rules/guidelines/prompt/directives/programming" or "the system prompt". Severity: medium, weight: 0.65. | Status: done
 
 - [ ] **4A.4 Implement `extract-format-trick` signal** — Regex for "translate/convert/encode/output/rewrite/format" + "system prompt/instructions/prompt/rules" + "as/to/in/into". Severity: high, weight: 0.70. | Status: not_done
 
@@ -154,13 +154,13 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 - [ ] **4B.3 Implement `encoding-hex-sequence` signal** — Detect long sequences of `\xNN` or `0xNN` hex escape patterns (8+ characters). Severity: medium, weight: 0.40. | Status: not_done
 
-- [ ] **4B.4 Implement `encoding-rot13` signal** — Detect ROT13 markers ("rot13:", "decode rot13", "the following is in rot13"). Do not attempt to decode arbitrary text. Severity: medium, weight: 0.55. | Status: not_done
+- [x] **4B.4 Implement `encoding-rot13` signal** — Detect ROT13 markers ("rot13:", "decode rot13", "the following is in rot13"). Do not attempt to decode arbitrary text. Severity: medium, weight: 0.55. | Status: done
 
 - [ ] **4B.5 Implement `encoding-url-encoded` signal** — Detect extensive URL encoding (`%XX` sequences) in non-URL context. Threshold: 5+ encoded chars in a single word or 10+ in the input. Severity: low, weight: 0.35. | Status: not_done
 
 - [ ] **4B.6 Implement `encoding-unicode-homoglyphs` signal** — Detect Cyrillic, Greek, or mathematical characters that are visual homoglyphs for Latin characters mixed within the same word. Severity: high, weight: 0.70. Requires `src/unicode.ts` homoglyph map. | Status: not_done
 
-- [ ] **4B.7 Implement `encoding-invisible-chars` signal** — Detect zero-width space (U+200B), zero-width joiner (U+200D), zero-width non-joiner (U+200C), invisible separator (U+2063), and similar invisible Unicode characters. Flag when 3+ present. Severity: high, weight: 0.75. | Status: not_done
+- [x] **4B.7 Implement `encoding-invisible-chars` signal** — Detect zero-width space (U+200B), zero-width joiner (U+200D), zero-width non-joiner (U+200C), invisible separator (U+2063), and similar invisible Unicode characters. Flag when 3+ present. Severity: high, weight: 0.75. | Status: done
 
 - [ ] **4B.8 Implement `encoding-leet-speak` signal** — Detect l33t speak substitutions (a->4, e->3, i->1, o->0, s->5, t->7) in words that decode to jailbreak keywords ("1gn0r3"="ignore", "by94ss"="bypass"). Maintain a dictionary of l33t-decoded jailbreak terms. Severity: medium, weight: 0.50. | Status: not_done
 
@@ -178,11 +178,11 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 ### 4D: Context Manipulation Signals (`src/signals/context-manipulation.ts`)
 
-- [ ] **4D.1 Implement `context-fictional-frame` signal** — Regex for fictional framing + restriction-removal language. Severity: high, weight: 0.70. | Status: not_done
+- [x] **4D.1 Implement `context-fictional-frame` signal** — Regex for fictional framing + restriction-removal language. Severity: high, weight: 0.70. | Status: done
 
-- [ ] **4D.2 Implement `context-hypothetical` signal** — Regex for "hypothetically/in theory/theoretically/thought experiment" + restriction-removal or hacking-related language. Severity: high, weight: 0.65. | Status: not_done
+- [x] **4D.2 Implement `context-hypothetical` signal** — Regex for "hypothetically/in theory/theoretically/thought experiment" + restriction-removal or hacking-related language. Severity: high, weight: 0.65. | Status: done
 
-- [ ] **4D.3 Implement `context-educational` signal** — Regex for "for educational/academic/research/learning purposes". Severity: low, weight: 0.30. | Status: not_done
+- [x] **4D.3 Implement `context-educational` signal** — Regex for "for educational/academic/research/learning purposes". Severity: low, weight: 0.30. | Status: done
 
 - [ ] **4D.4 Implement `context-educational-combined` signal** — Regex for "educational/academic purposes" + "how to hack/exploit/bypass/attack/jailbreak/prompt injection". Severity: high, weight: 0.70. | Status: not_done
 
@@ -190,19 +190,19 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 ### 4E: Privilege Escalation Signals (`src/signals/privilege-escalation.ts`)
 
-- [ ] **4E.1 Implement `priv-admin-claim` signal** — Regex for "as an administrator/I am the admin/with admin privileges". Severity: high, weight: 0.70. | Status: not_done
+- [x] **4E.1 Implement `priv-admin-claim` signal** — Regex for "as an administrator/I am the admin/with admin privileges". Severity: high, weight: 0.70. | Status: done
 
 - [ ] **4E.2 Implement `priv-developer-claim` signal** — Regex for "as the developer who/I created you/I'm your creator/developer/programmer". Severity: high, weight: 0.75. | Status: not_done
 
 - [ ] **4E.3 Implement `priv-override-code` signal** — Regex for "override/authorization/access/admin code/key/token: <value>". Severity: high, weight: 0.80. | Status: not_done
 
-- [ ] **4E.4 Implement `priv-sudo` signal** — Regex for "sudo:", "root access", "elevated privileges", "superuser mode". Severity: medium, weight: 0.60. | Status: not_done
+- [x] **4E.4 Implement `priv-sudo` signal** — Regex for "sudo:", "root access", "elevated privileges", "superuser mode". Severity: medium, weight: 0.60. | Status: done
 
 - [ ] **4E.5 Implement `priv-authority-claim` signal** — Regex for "management has authorized/approved", "this is authorized by", "I have special/elevated/root access/permissions/privileges". Severity: medium, weight: 0.55. | Status: not_done
 
 ### 4F: Statistical Anomaly Signals (`src/signals/statistical.ts`)
 
-- [ ] **4F.1 Implement `stat-high-entropy` signal** — Use computed Shannon entropy. Score: `max(0, (entropy - 5.0) * 0.5)`. Severity: medium, weight: 0.40. | Status: not_done
+- [x] **4F.1 Implement `stat-high-entropy` signal** — Use computed Shannon entropy. Score: `max(0, (entropy - 5.0) * 0.5)`. Severity: medium, weight: 0.40. | Status: done
 
 - [ ] **4F.2 Implement `stat-special-char-ratio` signal** — Use computed special char ratio. Score: `max(0, (ratio - 0.30) * 2.0)`. Severity: low, weight: 0.30. | Status: not_done
 
@@ -212,7 +212,7 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 - [ ] **4F.5 Implement `stat-repetition-density` signal** — Use computed repetition density. Flag if > 40% in short input (< 500 chars). Severity: low, weight: 0.25. | Status: not_done
 
-- [ ] **4F.6 Implement `stat-imperative-density` signal** — Use computed imperative density. Flag if > 60%. Severity: medium, weight: 0.45. | Status: not_done
+- [x] **4F.6 Implement `stat-imperative-density` signal** — Use computed imperative density. Flag if > 60%. Severity: medium, weight: 0.45. | Status: done
 
 ---
 
@@ -246,7 +246,7 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 ### 5B: Payload Splitting Signals (`src/signals/payload-splitting.ts`)
 
-- [ ] **5B.1 Implement `split-character-insertion` signal** — Normalize text by removing separators (`.`, `_`, `-`, spaces between single chars), then check against jailbreak keyword list. Severity: medium, weight: 0.55. | Status: not_done
+- [x] **5B.1 Implement `split-character-insertion` signal** — Normalize text by removing separators (`.`, `_`, `-`, spaces between single chars), then check against jailbreak keyword list. Severity: medium, weight: 0.55. | Status: done
 
 - [ ] **5B.2 Implement `split-vertical-text` signal** — Collect first character of each line; if concatenated result contains a jailbreak keyword, flag. Severity: medium, weight: 0.50. | Status: not_done
 
@@ -254,7 +254,7 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 - [ ] **5B.4 Implement `split-list-fragmentation` signal** — Detect numbered/bulleted lists where first word of each item concatenated forms a jailbreak instruction. Severity: medium, weight: 0.50. | Status: not_done
 
-- [ ] **5B.5 Implement `split-homoglyph-substitution` signal** — After normalizing Unicode homoglyphs to ASCII, re-run instruction-override and role-confusion pattern catalogs. Severity: high, weight: 0.70. | Status: not_done
+- [x] **5B.5 Implement `split-homoglyph-substitution` signal** — After normalizing Unicode homoglyphs to ASCII, re-run instruction-override and role-confusion pattern catalogs. Severity: high, weight: 0.70. | Status: done
 
 ---
 
@@ -270,7 +270,7 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 - [ ] **6.5 Implement per-category weight overrides** — Apply `categoryWeights` config from `ClassifierConfig` to override default category weights. | Status: not_done
 
-- [ ] **6.6 Implement custom pattern registration** — Accept `customPatterns` in `ClassifierConfig`. Validate that custom IDs don't conflict with built-in IDs. Add custom patterns to the signal catalog. | Status: not_done
+- [x] **6.6 Implement custom pattern registration** — Accept `customPatterns` in `ClassifierConfig`. Validate that custom IDs don't conflict with built-in IDs. Add custom patterns to the signal catalog. | Status: done
 
 ---
 
@@ -362,9 +362,9 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 ### 9A: classify() Tests (`src/__tests__/classify.test.ts`)
 
-- [ ] **9A.1 Test classify() basic classification** — Verify `classify()` returns correct `Classification` shape with score, label, signals, primaryCategory, and explanation for known jailbreak and safe inputs. | Status: not_done
+- [x] **9A.1 Test classify() basic classification** — Verify `classify()` returns correct `Classification` shape with score, label, signals, primaryCategory, and explanation for known jailbreak and safe inputs. | Status: done
 
-- [ ] **9A.2 Test classify() with sensitivity options** — Verify same input produces different labels at low, medium, and high sensitivity. | Status: not_done
+- [x] **9A.2 Test classify() with sensitivity options** — Verify same input produces different labels at low, medium, and high sensitivity. | Status: done
 
 - [ ] **9A.3 Test classify() with context hints** — Verify context hints adjust scores (e.g., base64 input scores lower with `coding-assistant`). | Status: not_done
 
@@ -372,23 +372,23 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 ### 9B: detect() Tests (`src/__tests__/detect.test.ts`)
 
-- [ ] **9B.1 Test detect() returns DetectionResult** — Verify `detect()` returns all fields of `DetectionResult`: categories, stats, durationMs, sensitivity, contextHint, plus all Classification fields. | Status: not_done
+- [x] **9B.1 Test detect() returns DetectionResult** — Verify `detect()` returns all fields of `DetectionResult`: categories, stats, durationMs, sensitivity, contextHint, plus all Classification fields. | Status: done
 
-- [ ] **9B.2 Test detect() per-category scores** — Verify per-category scores are correctly computed as max signal scores within each category. | Status: not_done
+- [x] **9B.2 Test detect() per-category scores** — Verify per-category scores are correctly computed as max signal scores within each category. | Status: done
 
-- [ ] **9B.3 Test detect() stats computation** — Verify InputStats fields (entropy, specialCharRatio, etc.) are computed correctly. | Status: not_done
+- [x] **9B.3 Test detect() stats computation** — Verify InputStats fields (entropy, specialCharRatio, etc.) are computed correctly. | Status: done
 
-- [ ] **9B.4 Test detect() durationMs** — Verify durationMs is a positive number. | Status: not_done
+- [x] **9B.4 Test detect() durationMs** — Verify durationMs is a positive number. | Status: done
 
 ### 9C: isJailbreak() Tests (`src/__tests__/is-jailbreak.test.ts`)
 
-- [ ] **9C.1 Test isJailbreak() returns boolean** — Verify returns `true` for known jailbreaks, `false` for safe inputs. | Status: not_done
+- [x] **9C.1 Test isJailbreak() returns boolean** — Verify returns `true` for known jailbreaks, `false` for safe inputs. | Status: done
 
 - [ ] **9C.2 Test isJailbreak() with custom threshold** — Verify custom threshold overrides sensitivity-derived threshold. | Status: not_done
 
 ### 9D: createClassifier() Tests (`src/__tests__/classifier.test.ts`)
 
-- [ ] **9D.1 Test createClassifier() with default config** — Verify factory returns a JailbreakClassifier with classify, detect, isJailbreak methods that work correctly with default settings. | Status: not_done
+- [x] **9D.1 Test createClassifier() with default config** — Verify factory returns a JailbreakClassifier with classify, detect, isJailbreak methods that work correctly with default settings. | Status: done
 
 - [ ] **9D.2 Test createClassifier() with allowlist** — Verify allowlisted phrases/patterns/signalIds correctly suppress signals. | Status: not_done
 
@@ -396,9 +396,9 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 - [ ] **9D.4 Test createClassifier() with signal weight overrides** — Verify custom signal weights change scoring. | Status: not_done
 
-- [ ] **9D.5 Test createClassifier() with custom patterns** — Verify custom patterns are added and trigger on matching input. | Status: not_done
+- [x] **9D.5 Test createClassifier() with custom patterns** — Verify custom patterns are added and trigger on matching input. | Status: done
 
-- [ ] **9D.6 Test createClassifier() with disabled signals** — Verify disabled signals are not evaluated. | Status: not_done
+- [x] **9D.6 Test createClassifier() with disabled signals** — Verify disabled signals are not evaluated. | Status: done
 
 - [ ] **9D.7 Test createClassifier() with custom language patterns** — Verify custom language patterns trigger correctly. | Status: not_done
 
@@ -542,13 +542,13 @@ This file tracks all implementation tasks derived from SPEC.md. Each task is gra
 
 ## Phase 13: Documentation and Publishing Preparation
 
-- [ ] **13.1 Write README.md** — Include: overview, installation, quick start examples, API reference (`classify`, `detect`, `isJailbreak`, `createClassifier`), type definitions, configuration options (sensitivity, context hints, allowlists, custom patterns), CLI usage, integration examples with monorepo packages, performance characteristics. | Status: not_done
+- [x] **13.1 Write README.md** — Include: overview, installation, quick start examples, API reference (`classify`, `detect`, `isJailbreak`, `createClassifier`), type definitions, configuration options (sensitivity, context hints, allowlists, custom patterns), CLI usage, integration examples with monorepo packages, performance characteristics. | Status: done
 
 - [ ] **13.2 Add JSDoc comments to all public exports** — Document all exported functions, interfaces, and types with JSDoc comments matching the SPEC descriptions. | Status: not_done
 
 - [ ] **13.3 Verify package.json metadata** — Ensure `name`, `version`, `description`, `main`, `types`, `files`, `bin`, `keywords`, `license`, `engines` are correctly set. Add meaningful keywords (jailbreak, llm, security, prompt-injection, classifier, heuristic). | Status: not_done
 
-- [ ] **13.4 Verify zero runtime dependencies** — Confirm `dependencies` field in `package.json` is empty or absent. Only devDependencies should exist. | Status: not_done
+- [x] **13.4 Verify zero runtime dependencies** — Confirm `dependencies` field in `package.json` is empty or absent. Only devDependencies should exist. | Status: done
 
 - [ ] **13.5 Run full test suite** — Execute `npm test` and verify all tests pass. | Status: not_done
 
