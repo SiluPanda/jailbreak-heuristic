@@ -3,6 +3,7 @@
 Zero-dependency jailbreak attempt classifier for LLM input using pattern matching and statistical heuristics.
 
 [![npm version](https://img.shields.io/npm/v/jailbreak-heuristic.svg)](https://www.npmjs.com/package/jailbreak-heuristic)
+[![npm downloads](https://img.shields.io/npm/dt/jailbreak-heuristic.svg)](https://www.npmjs.com/package/jailbreak-heuristic)
 [![license](https://img.shields.io/npm/l/jailbreak-heuristic.svg)](https://github.com/SiluPanda/jailbreak-heuristic/blob/master/LICENSE)
 [![node](https://img.shields.io/node/v/jailbreak-heuristic.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue.svg)](https://www.typescriptlang.org/)
