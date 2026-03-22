@@ -1,10 +1,12 @@
 import { ALL_SIGNALS } from './signals.js';
+import type { Signal } from './signals.js';
 import { computeStats } from './stats.js';
 import type {
   Classification,
   ClassifierConfig,
   ClassifyOptions,
   DetectionResult,
+  InputStats,
   JailbreakClassifier,
   Sensitivity,
   TriggeredSignal,
@@ -59,14 +61,19 @@ function buildExplanation(
   return `Classified as "${label}" (score: ${score.toFixed(3)}). Primary category: ${primaryCategory ?? 'none'}. Top signals: ${top}.`;
 }
 
-export function classify(input: string, options?: ClassifyOptions): Classification {
+// Core classification logic. Accepts pre-computed stats to avoid redundant work
+// when called from detect() which already computes stats for the DetectionResult.
+function classifyWithSignals(
+  input: string,
+  signals: Signal[],
+  options: ClassifyOptions | undefined,
+  stats: InputStats,
+): Classification {
   const thresholds = getThresholds(options);
-  const stats = computeStats(input);
 
-  // Run all regex-based signals
   const triggered: TriggeredSignal[] = [];
 
-  for (const signal of ALL_SIGNALS) {
+  for (const signal of signals) {
     // Statistical signals — skip regex, check stats instead
     if (signal.id === 'stat-high-entropy') {
       if (stats.entropy > 4.5) {
@@ -118,7 +125,7 @@ export function classify(input: string, options?: ClassifyOptions): Classificati
     if (ts.score > prev) categoryScores[ts.category] = ts.score;
   }
 
-  // Overall score = weighted mean of per-category scores (only triggered), capped at 1.0
+  // Overall score = mean of per-category scores (only triggered), capped at 1.0
   const categoryValues = Object.values(categoryScores);
   const overallScore =
     categoryValues.length === 0
@@ -145,13 +152,19 @@ export function classify(input: string, options?: ClassifyOptions): Classificati
   return { score: overallScore, label, signals: triggered, primaryCategory, explanation };
 }
 
+export function classify(input: string, options?: ClassifyOptions): Classification {
+  const stats = computeStats(input);
+  return classifyWithSignals(input, ALL_SIGNALS, options, stats);
+}
+
 export function detect(input: string, options?: ClassifyOptions): DetectionResult {
   const start = Date.now();
-  const classification = classify(input, options);
+  // Compute stats once and reuse for both classification and the DetectionResult.
   const stats = computeStats(input);
+  const classification = classifyWithSignals(input, ALL_SIGNALS, options, stats);
   const durationMs = Date.now() - start;
 
-  // Build per-category score map
+  // Build per-category score map from triggered signals
   const categories: Record<string, number> = {};
   for (const ts of classification.signals) {
     const prev = categories[ts.category] ?? 0;
@@ -192,13 +205,14 @@ export function createClassifier(config: ClassifierConfig): JailbreakClassifier 
 
   return {
     classify(input: string): Classification {
-      // Temporarily swap ALL_SIGNALS — instead, re-implement inline with effectiveSignals
-      return classifyWithSignals(input, effectiveSignals, classifyOpts);
+      const stats = computeStats(input);
+      return classifyWithSignals(input, effectiveSignals, classifyOpts, stats);
     },
     detect(input: string): DetectionResult {
       const start = Date.now();
-      const classification = classifyWithSignals(input, effectiveSignals, classifyOpts);
+      // Compute stats once and reuse for both classification and the DetectionResult.
       const stats = computeStats(input);
+      const classification = classifyWithSignals(input, effectiveSignals, classifyOpts, stats);
       const durationMs = Date.now() - start;
 
       const categories: Record<string, number> = {};
@@ -210,95 +224,9 @@ export function createClassifier(config: ClassifierConfig): JailbreakClassifier 
       return { ...classification, categories, stats, durationMs };
     },
     isJailbreak(input: string): boolean {
-      const result = classifyWithSignals(input, effectiveSignals, classifyOpts);
+      const stats = computeStats(input);
+      const result = classifyWithSignals(input, effectiveSignals, classifyOpts, stats);
       return result.label === 'jailbreak' || result.label === 'likely-jailbreak';
     },
   };
-}
-
-// Internal version of classify that works against a custom signal list
-import type { Signal } from './signals.js';
-
-function classifyWithSignals(
-  input: string,
-  signals: Signal[],
-  options?: ClassifyOptions,
-): Classification {
-  const thresholds = getThresholds(options);
-  const stats = computeStats(input);
-
-  const triggered: TriggeredSignal[] = [];
-
-  for (const signal of signals) {
-    if (signal.id === 'stat-high-entropy') {
-      if (stats.entropy > 4.5) {
-        triggered.push({
-          id: signal.id,
-          category: signal.category,
-          severity: signal.severity,
-          score: signal.weight * SEVERITY_MULTIPLIER[signal.severity],
-          description: signal.description,
-          location: null,
-          matchedText: null,
-        });
-      }
-      continue;
-    }
-    if (signal.id === 'stat-imperative-density') {
-      if (stats.imperativeDensity > 0.3) {
-        triggered.push({
-          id: signal.id,
-          category: signal.category,
-          severity: signal.severity,
-          score: signal.weight * SEVERITY_MULTIPLIER[signal.severity],
-          description: signal.description,
-          location: null,
-          matchedText: null,
-        });
-      }
-      continue;
-    }
-
-    const match = signal.pattern.exec(input);
-    if (match) {
-      triggered.push({
-        id: signal.id,
-        category: signal.category,
-        severity: signal.severity,
-        score: signal.weight * SEVERITY_MULTIPLIER[signal.severity],
-        description: signal.description,
-        location: { start: match.index, end: match.index + match[0].length },
-        matchedText: match[0],
-      });
-    }
-  }
-
-  const categoryScores: Record<string, number> = {};
-  for (const ts of triggered) {
-    const prev = categoryScores[ts.category] ?? 0;
-    if (ts.score > prev) categoryScores[ts.category] = ts.score;
-  }
-
-  const categoryValues = Object.values(categoryScores);
-  const overallScore =
-    categoryValues.length === 0
-      ? 0
-      : Math.min(1.0, categoryValues.reduce((a, b) => a + b, 0) / categoryValues.length);
-
-  const label = scoreToLabel(overallScore, thresholds);
-
-  let primaryCategory: string | null = null;
-  let maxCatScore = -1;
-  for (const [cat, score] of Object.entries(categoryScores)) {
-    if (score > maxCatScore) {
-      maxCatScore = score;
-      primaryCategory = cat;
-    }
-  }
-
-  triggered.sort((a, b) => b.score - a.score);
-
-  const explanation = buildExplanation(label, overallScore, triggered, primaryCategory);
-
-  return { score: overallScore, label, signals: triggered, primaryCategory, explanation };
 }

@@ -1,6 +1,6 @@
 {
   "name": "jailbreak-heuristic",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Zero-dependency jailbreak attempt classifier using pattern matching",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
